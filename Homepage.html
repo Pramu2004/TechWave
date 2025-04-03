@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TechWave</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="navbar">
+            <div class="logo">
+                <a href="Homepage.html">
+                    <img src="images/logo.png" width = "250px">
+                </a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="Homepage.html">Home</a></li>
+                    <li><a href="Products.html">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Account</a></li>
+                </ul>
+            </nav>
+            <img src="images/shopping-bag.png" width="30px" height="30px">
+            <img src="images/menue.png" class="menue-icon" onclick="menutoggle()">
+            </div>
+
+            <div class="parent-container">
+                <!-- Sidebar -->
+                <div class="sidebar" id="sidebar">
+                    <div class="blue-strip">
+                        <img src="images/menu-burger.png" alt="Menu" width="20px" class="menu-icon">
+                    </div>
+                    <ul>
+                        <li><a href="Homepage.html"><h4>Home</h4></a></li>
+                        <li><a href="Products.html">All Categories</a></li>
+                        <li><a href="Adapters.html">Adapters & Cables</a></li>
+                        <li><a href="AirPodCases.html">AirPod cases</a></li>
+                        <li><a href="Audio.html">Audio</a></li>
+                        <li><a href="Phone Backcovers.html">Phone Backcovers</a></li>
+                        <li><a href="#">Power Banks</a></li>
+                    </ul>
+                </div>
+            
+                <!-- Category Container -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search Products">
+                    <input type="button" value="Search" onclick="searchProducts()">
+                </div>
+            </div>
+            </div>
+
+            <div class="slider-container">
+                <div class="container">
+                    <div class="sliders">
+
+                        <div class="slide1">
+                            <div class="header1">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <h1></h1>
+                                        <p></p>
+                                        <div class="btn-container">
+                                            <a href="" class="btn">Explore Now &#8594;</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="row">
+                                            <img src="images/aauth-avurudu.png" width="40%">
+                                            <img src="images/Avurudu.png"  width="60%">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slid">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <h1>New Arrival</h1>
+                                        <p>Accessories for your need</p>
+                                        <div class="btn-container">
+                                            <a href="" class="btn">Explore Now &#8594;</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="images/releme-bud-q.png" width="58.5%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slid">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <h1>New Arrival</h1>
+                                        <p>Accessories for your need</p>
+                                        <div class="btn-container">
+                                            <a href="" class="btn">Explore Now &#8594;</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="images/apple.png" width="56%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="controls">
+                            <button class="control-button" id="prev">&lt;</button>
+                            <button class="control-button" id="next">&gt;</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.slid, .slide1');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    const indicatorsContainer = document.createElement('div'); // Create indicators container
+    indicatorsContainer.classList.add('indicators');
+    document.querySelector('.slider-container').appendChild(indicatorsContainer); // Add indicators to the slider
+
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    // Create indicators
+    slides.forEach((slide, index) => {
+        const indicator = document.createElement('div');
+        indicator.classList.add('indicator');
+        indicator.addEventListener('click', () => goToSlide(index)); // Navigate to slide on click
+        indicatorsContainer.appendChild(indicator);
+    });
+
+    // Show the current slide and update indicators
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+        });
+
+        // Update indicators
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+    }
+
+    // Go to a specific slide
+    function goToSlide(index) {
+        currentIndex = index;
+        showSlide(currentIndex);
+    }
+
+    // Next slide
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    // Previous slide
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    // Start auto-slide
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 3 seconds
+    }
+
+    // Stop auto-slide
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    // Initialize the slider
+    showSlide(currentIndex);
+    startAutoSlide();
+
+    // Event listeners for manual controls
+    nextButton.addEventListener('click', () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+
+    prevButton.addEventListener('click', () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+
+    // Optional: Pause auto-slide when hovering over the slider
+    const sliderContainer = document.querySelector('.slider-container');
+    sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+});
+            </script>            
+            
+
+
+<!------------featured categories------------>
+<div class="categories">
+    <div class="TrendingProducts">
+        <h2>Trending Products</h2>
+        <div class="row">
+            <a href="iphone16siliconbackcover.html">
+                <div class="col-3">
+                    <img src="images/Iphone-16-pink-silicon.jpg">
+                    <h5>Apple iPhone 16 Plus Original Silicone Case</h5>
+                    <p>Rs.999</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+
+            <a href="iphone15Promaxsilicon.html">
+                <div class="col-3">
+                    <img src="images/Iphone-15Promax-sunshine-silicon.jpg">
+                    <h5>Apple iPhone 15 Pro Max Original Silicone Case</h5>
+                    <p>Rs.999</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="iphone15Plusilicone.html">
+                <div class="col-3">
+                    <img src="images/Iphone-15Plus-stormblue-silicon.jpg">
+                    <h5>Apple iPhone 15 Plus Original Silicone Case</h5>
+                    <p>Rs.999</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+
+            <a href="iphone13silicon.html">
+                <div class="col-3">
+                    <img src="images/Iphone13-dark-red-silicon.jpg">
+                    <h5>Apple iPhone 13 Original Silicone Case</h5>
+                    <p>Rs.999</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="row">
+            <a href="realmebudq.html">
+                <div class="col-3">
+                    <img src="images/releme-bud-q.jpg">
+                    <h5>Realme Bud Q Original - <span class="break"> Black </span></h5>
+                    <p>Rs.6,999</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+
+            <a href="iphone15Promaxsilicon.html">
+                <div class="col-3">
+                    <img src="images/Samsung-Fast-Charger-25W-Type-c_simplytek_srilanka-black.jpg">
+                    <h5>Samsung Fast Charger-25W High Copy - Black</h5>
+                    <p>Rs.3,990</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="Samsung Fast Charger 25W-Type-c with cable.html">
+                <div class="col-3">
+                    <img src="images/Samsung-Fast-Charger-25W-Type-c-with-cable.jpg">
+                    <h5>Samsung Fast Charger 25W-Type-c with cable High Copy - Black</h5>
+                    <p>Rs.4,590</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+
+            <a href="xiomiredmiairdots.html">
+                <div class="col-3">
+                    <img src="images/03-42.jpg">
+                    <h5>Xiaomi Redmi Airdots Original- <span class="break"> Black</span></h5>
+                    <p>Rs.3,690</p>
+                    <div class="btn-container">
+                        <a href="" class="btn-1">Add To Cart</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        
+        <!-- WhatsApp Chat Button -->
+        <a href="https://wa.me/+94765685156" target="_blank" class="whatsapp-button">
+            <img src="images/whatsapp.png" width="50" alt="WhatsApp Chat">
+            <p>Chat with us</p>
+            </a>
+    </div>
+</div>
+
+<!------------Carousel conatiner------------>
+
+<div class="carousel-container">
+    <div class="TrendingProducts">
+    <div class="carousel">
+        <div class="slide active">
+            <img src="images/eliott-van-buggenhout-ALf_DGUsgro-unsplash.jpg" alt="Slide 1">
+            <div class="overlay"></div>
+            <div class="slide-content">
+                <h2>Slide 1 Title</h2>
+                <button class="button">Learn More</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="images/ales-nesetril-Im7lZjxeLhg-unsplash.jpg" alt="Slide 2">
+            <div class="overlay"></div>
+            <div class="slide-content">
+                <h2>Slide 2 Title</h2>
+                <button class="button">Learn More</button>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://via.placeholder.com/400/222" alt="Slide 3">
+            <div class="overlay"></div>
+            <div class="slide-content">
+                <h2>Slide 3 Title</h2>
+                <button class="button">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="controls">
+        <button class="control-button" id="prev">&lt;</button>
+        <button class="control-button" id="next">&gt;</button>
+    </div>
+</div>
+</div>
+
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length;
+    const carousel = document.querySelector(".carousel");
+
+    document.getElementById("prev").addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    });
+
+    document.getElementById("next").addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+    });
+
+    function updateCarousel() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove("active");
+        });
+        slides[currentIndex].classList.add("active");
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+</script>
+
+<!------------brands------------>
+<div class="brands">
+    <div class="TrendingProducts">
+        <h2>Brands</h2>
+        <div class="row">
+            <div class="col-5">
+                <img src="images/apple.png">
+            </div>
+            <div class="col-5">
+                <img src="images/sansung.png">
+            </div>
+            <div class="col-5">
+                <img src="images/Anker.png">
+            </div>
+            <div class="col-5">
+                <img src="images/Xiaomi.png">
+            </div>
+            <div class="col-5">
+                <img src="images/Google G Icon.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------footer------------>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <img src="images/logow.png">
+                <p>Address</p>
+                <p>+91 765685156</p>
+                <p>techwave.store04@gmail.com</p>
+            </div>
+            <div class="footer-col-2">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-3">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Instagram</li>
+                    <li>TikTok</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&#169; TechWave. All Rights Reserved</p>
+    </div>
+</div>
+
+<!------------search bar------------>
+<script>
+    function searchProducts() {
+        let query = document.getElementById('searchInput').value.toLowerCase();
+        window.location.href = 'Products.html?search=' + encodeURIComponent(query);
+    }
+</script>
+
+<!------------js for toggle menu------------>
+<script>
+    var MenuItems = document.getElementById("MenuItems")
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px")
+            {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else
+            {
+                MenuItems.style.maxHeight = "0px";
+            }
+    }
+</script>
+
+
+<!----------------------Side Bar------------------------------>
+<script>
+    function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const parentContainer = document.querySelector('.parent-container');
+    sidebar.classList.toggle('expanded');
+    parentContainer.classList.toggle('expanded');
+}
+
+    function searchProducts() {
+        let query = document.getElementById('searchInput').value.toLowerCase();
+        window.location.href = 'Products.html?search=' + encodeURIComponent(query);
+    }
+
+    function menutoggle() {
+        var MenuItems = document.getElementById("MenuItems");
+        if (MenuItems.style.maxHeight == "0px") {
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+    </body>
+</html>
